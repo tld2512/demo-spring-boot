@@ -56,17 +56,24 @@ public class AccountController {
         String password = userLogin.getPassword();
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtTokenProvider.generateJwtTokenFromUserDetails((UserDetailsImpl) authentication.getPrincipal());
+        org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) authentication.getPrincipal();
+        String name = user.getUsername();
+        String jwt = jwtTokenProvider.generateJwtTokenFromUserDetails(new UserDetailsImpl(this.userService.findUserByUsername(name)));
         return new ResponseEntity<>(jwt, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/list-user")
     public ResponseEntity<List<User>> listUser() {
         List<User> users = this.userService.findAllUser();
-        if (users.size() == 0){
+        if (users.size() == 0) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/unauthorised")
+    public ResponseEntity<String> unauthorised() {
+        return new ResponseEntity<>("You are not authorized", HttpStatus.UNAUTHORIZED);
     }
 
     private boolean isUsernameExisted(String username) {

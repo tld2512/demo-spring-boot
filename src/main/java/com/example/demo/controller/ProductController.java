@@ -58,7 +58,7 @@ public class ProductController {
         return new ResponseEntity<>("Successful", HttpStatus.CREATED);
     }
 
-    @PutMapping("/update/{pid}")
+    @PatchMapping("/update/{pid}")
     public void updateProduct(@RequestBody ProductDTO product) {
         this.productService.updateProduct(product);
     }

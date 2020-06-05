@@ -1,7 +1,7 @@
 package com.example.demo.service.account;
 
-import com.example.demo.entity.dto.user.NewUserDTO;
 import com.example.demo.entity.account.User;
+import com.example.demo.entity.dto.user.NewUserDTO;
 
 import java.util.List;
 import java.util.Optional;
