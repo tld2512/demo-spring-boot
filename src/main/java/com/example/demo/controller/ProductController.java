@@ -43,10 +43,7 @@ public class ProductController {
     @GetMapping("/productList/category")
     public ResponseEntity<List<Product>> getProductListByCategory(@RequestParam("cid") String cid) {
         Optional<Category> category = this.categoryService.findById(cid);
-        if (category.isPresent()) {
-            return new ResponseEntity<>(this.productService.findByCategory(category.get()), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return category.map(value -> new ResponseEntity<>(this.productService.findByCategory(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/create")

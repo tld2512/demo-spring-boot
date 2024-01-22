@@ -3,7 +3,7 @@ package com.example.demo.service.account;
 import com.example.demo.entity.account.User;
 import com.example.demo.entity.dto.user.NewUserDTO;
 import com.example.demo.repository.account.AuthorityRepository;
-import com.example.demo.repository.account.UserRepository;
+import com.example.demo.repository.account.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class UserService implements IUserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -27,23 +27,23 @@ public class UserService implements IUserService {
         user.setUsername(userDTO.getUsername());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         user.setEmail(userDTO.getEmail());
-        this.userRepository.save(user);
+        this.IUserRepository.save(user);
         this.authorityRepository.saveAuthority(user);
     }
 
     @Override
     public User findUserByUsername(String username) {
-        return this.userRepository.findUserByUsername(username);
+        return this.IUserRepository.findUserByUsername(username);
     }
 
     @Override
     public List<User> findAllUser() {
-        return this.userRepository.findAll();
+        return this.IUserRepository.findAll();
     }
 
     @Override
     public Optional<User> findUserById(Long id) {
-        return this.userRepository.findById(id);
+        return this.IUserRepository.findById(id);
     }
 
     @Override
@@ -53,6 +53,6 @@ public class UserService implements IUserService {
 
     @Override
     public boolean checkEmailExisted(String email) {
-        return this.userRepository.findUserByEmail(email) != null;
+        return this.IUserRepository.findUserByEmail(email) != null;
     }
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -65,7 +65,7 @@ public class AccountController {
     @GetMapping("/list-user")
     public ResponseEntity<List<User>> listUser() {
         List<User> users = this.userService.findAllUser();
-        if (users.size() == 0) {
+        if (users.isEmpty()) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(users, HttpStatus.OK);

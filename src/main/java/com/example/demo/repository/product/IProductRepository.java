@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 @Repository
 @Transactional
-public interface ProductRepository extends JpaRepository<Product, String> {
+public interface IProductRepository extends JpaRepository<Product, String> {
 
     @Query("SELECT p FROM Product p where p.product_name like %:name%")
     List<Product> findByProductNameContains(@Param("name") String name);
