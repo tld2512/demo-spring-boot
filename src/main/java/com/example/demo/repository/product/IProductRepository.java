@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public interface IProductRepository extends JpaRepository<Product, String> {
 
-    @Query("SELECT p FROM Product p where p.product_name like %:name%")
+    @Query("SELECT p FROM Product p where p.productName like %:name%")
     List<Product> findByProductNameContains(@Param("name") String name);
 
     List<Product> findAllByCategory(Category category);

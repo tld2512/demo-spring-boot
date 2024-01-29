@@ -1,5 +1,6 @@
 package com.example.demo.entity.model;
 
+import com.example.demo.entity.account.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -13,12 +14,12 @@ public class Product {
     @Id
     @Column(name = "id")
     @NotNull(message = "Please enter product ID")
-    private String id;
+    private int id;
 
-    @Column(name = "product_name")
+    @Column(name = "productName")
     @NotNull(message = "Please enter product name")
     @Size(min = 3, message = "Product name must longer than 3 character")
-    private String product_name;
+    private String productName;
 
     @Column(name = "description")
     private String description;
@@ -31,16 +32,16 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product() {
-    }
+    @ManyToOne()
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public Product(String id, String product_name, String description, Double price, Category category) {
+    public Product(int id, String product_name, String description, Double price, Category category) {
         this.id = id;
-        this.product_name = product_name;
+        this.productName = product_name;
         this.description = description;
         this.price = price;
         this.category = category;
     }
-
 }
 

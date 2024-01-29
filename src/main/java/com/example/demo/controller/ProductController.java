@@ -42,7 +42,7 @@ public class ProductController {
 
     @GetMapping("/productList/category")
     public ResponseEntity<List<Product>> getProductListByCategory(@RequestParam("cid") String cid) {
-        Optional<Category> category = this.categoryService.findById(cid);
+        Optional<Category> category = this.categoryService.findById(Integer.parseInt(cid));
         return category.map(value -> new ResponseEntity<>(this.productService.findByCategory(value), HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -71,7 +71,7 @@ public class ProductController {
 
     @DeleteMapping("/delete/{pid}")
     public ResponseEntity<String> deleteProduct(@PathVariable("pid") String pid) {
-        if (!this.productService.isProductIdExisted(pid)) {
+        if (!this.productService.isProductIdExisted(Integer.parseInt(pid))) {
             return new ResponseEntity<>("Id not existed", HttpStatus.NO_CONTENT);
         }
         this.productService.delete(pid);

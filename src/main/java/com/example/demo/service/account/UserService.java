@@ -5,6 +5,8 @@ import com.example.demo.entity.dto.user.NewUserDTO;
 import com.example.demo.repository.account.AuthorityRepository;
 import com.example.demo.repository.account.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@EnableMethodSecurity(securedEnabled = true)
 public class UserService implements IUserService {
 
     @Autowired
@@ -37,6 +40,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> findAllUser() {
         return this.IUserRepository.findAll();
     }

@@ -23,8 +23,8 @@ public class CategoryService implements ICategoryService {
     }
 
     @Override
-    public Optional<Category> findById(String id) {
-        return this.ICategoryRepository.findById(id);
+    public Optional<Category> findById(int id) {
+        return this.ICategoryRepository.findById(String.valueOf(id));
     }
 
     @Override

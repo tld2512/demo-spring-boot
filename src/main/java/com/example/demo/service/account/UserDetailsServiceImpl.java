@@ -1,5 +1,6 @@
 package com.example.demo.service.account;
 
+import com.example.demo.entity.account.Authority;
 import com.example.demo.entity.account.User;
 import com.example.demo.repository.account.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user != null) {
             userBuilder = org.springframework.security.core.userdetails.User.withUsername(username);
             userBuilder.password(user.getPassword());
-            String[] authorities = user.getAuthorities().stream().map(a -> a.getAuthority()).toArray(String[]::new);
+            String[] authorities = user.getAuthorities().stream().map(Authority::getAuthority).toArray(String[]::new);
             userBuilder.authorities(authorities);
         } else {
             throw new UsernameNotFoundException("User not found");

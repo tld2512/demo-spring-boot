@@ -23,7 +23,7 @@ public interface IProductService {
 
     void delete(String pid);
 
-    boolean isProductIdExisted(String pid);
+    boolean isProductIdExisted(int pid);
 
-    Optional<Product> findProductById(String pid);
+    Optional<Product> findProductById(int pid);
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface ICategoryService {
     List<Category> findAll();
 
-    Optional<Category> findById(String id);
+    Optional<Category> findById(int id);
 
     void remove(Category category);
 

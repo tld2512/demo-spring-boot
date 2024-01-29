@@ -38,7 +38,7 @@ public class CategoryController {
 
     @PostMapping("/remove/{cid}")
     public ResponseEntity<Void> removeCategory(@PathVariable("cid") String cid) {
-        Optional<Category> category = categoryService.findById(cid);
+        Optional<Category> category = categoryService.findById(Integer.parseInt(cid));
         if (category.isPresent()) {
             categoryService.remove(category.get());
             return new ResponseEntity<>(HttpStatus.ACCEPTED);

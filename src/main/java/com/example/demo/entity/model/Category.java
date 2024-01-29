@@ -14,7 +14,7 @@ public class Category {
 
     @Id
     @Column(name = "id")
-    private String id;
+    private int id;
 
     @Column(name = "category_name", unique = true)
     private String category_name;

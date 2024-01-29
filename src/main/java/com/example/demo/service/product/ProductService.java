@@ -58,14 +58,14 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public boolean isProductIdExisted(String pid) {
+    public boolean isProductIdExisted(int pid) {
         Optional<Product> product = findProductById(pid);
         return product.isPresent();
     }
 
     @Override
-    public Optional<Product> findProductById(String pid) {
-        return this.IProductRepository.findById(pid);
+    public Optional<Product> findProductById(int pid) {
+        return this.IProductRepository.findById(String.valueOf(pid));
     }
 
 

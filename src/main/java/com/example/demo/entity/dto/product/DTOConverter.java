@@ -20,6 +20,6 @@ public class DTOConverter {
     }
 
     public ProductDTO convertToProductDTO(Product product) {
-        return new ProductDTO(product.getId(), product.getProduct_name(), product.getDescription(), product.getPrice(), product.getCategory().getId());
+        return new ProductDTO(product.getId(), product.getProductName(), product.getDescription(), product.getPrice(), product.getCategory().getId());
     }
 }
